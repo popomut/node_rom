@@ -1,0 +1,15 @@
+[
+    {
+      "id": "1",
+      "name": "Eggyra",
+      "effect1": "INT +2",
+      "effect2": "SP Regen +5",
+      "permanent": "Max HP +28"
+    },
+    {
+      "id": "2",
+      "name": "Chon Chon",
+      "effect1": "STR +2",
+      "effect2": "Def +2"
+    }
+  ]
