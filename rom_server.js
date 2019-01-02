@@ -1,6 +1,7 @@
 //https://www.w3schools.com/nodejs/nodejs_mongodb_find.asp
 //https://www.tutorialspoint.com/mongodb/mongodb_update_document.htm
-
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/mydb";  
 const express = require('express')
 const app = express()
 
@@ -28,21 +29,29 @@ app.use(function (req, res, next) {
   next();
 });
 
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/mydb";
+//var MongoClient = require('mongodb').MongoClient;
+//var url = "mongodb://localhost:27017/mydb";
+
 
 
 app.get('/books', (req, res) => {
-    
+  //var MongoClient = require('mongodb').MongoClient;
+  //var url = "mongodb://localhost:27017/mydb";   
   console.log('req: ' + req)
   
   MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbo = db.db("mydb");
-  dbo.collection("romcard").find({}, function(err, result) {
+  var temp = "1";
+  var temp2 = "2";
+  var query = { $or:[ {id: temp}, {id: temp2} ] };
+  
+  //dbo.collection("romcard").find({}, function(err, result) {
+    dbo.collection("romcard").find(query).toArray(function(err, result) {
     if (err) throw err;
-    console.log(result.name);
-    res.json(result)
+    console.log("========================");
+    console.log(result);
+    res.jsonp(result)
     db.close();
   });
 });
@@ -51,7 +60,8 @@ app.get('/books', (req, res) => {
 ///////////////////////////////////////////////////////////
 
 app.get('/books/:id', (req, res) => {
-
+  //var MongoClient = require('mongodb').MongoClient;
+  //var url = "mongodb://localhost:27017/mydb";
   console.log('req: ' + req)
   
   MongoClient.connect(url, function(err, db) {
